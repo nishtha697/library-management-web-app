@@ -10,6 +10,7 @@ import Register from "./components/Register/Register";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home.js";
 import Book from "./components/Home/Book.js";
+import Return from "./components/Return/Return";
 // import Profile from "./components/Profile/Profile";
 // import Cart from "./components/Cart/Cart";
 
@@ -27,10 +28,10 @@ function App() {
                         <Route index element={<Home />} />
                         <Route path="/cart" element={<div>TODO CART</div>} />
                         <Route path="/loans" element={<div>TODO LOANS</div>} />
-                        <Route path="/returns" element={<div>TODO RETURNS</div>} />
                         <Route path="/profile" element={<div>TODO PROFILE</div>} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/login" element={<Login />} />
+                        <Route path = "/returns" element = {<Return/>} />
                         <Route path="*" element={<div>INVALID PAGE</div>} />
                     </Routes>
                 </div>
