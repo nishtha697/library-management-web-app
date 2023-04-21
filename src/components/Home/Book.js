@@ -23,8 +23,13 @@ const Book = () => {
 
     useEffect(() => {
         setBook({...currentBook})
+        debugger
+        console.log(book)
     }, [currentBook])
 
+    console.log(book)
+
+    debugger
     const handleAddToCart = () => {
         //TODO: Thunks
         // dispatch(shoppingCartAddBookThunk(
@@ -53,7 +58,7 @@ const Book = () => {
 
 
                  {/* Title */}
-                 <h4 className="card-title mb-2">{book.title}</h4>
+                 <h4 className="card-title mb-2">{book.name}</h4>
 
                  {/* Book Tags & Author */}
                  <div className="mb-3">
@@ -79,7 +84,7 @@ const Book = () => {
                           src={book.image}
                           style={{width: "auto", height: "300px"}}
                           className="card-img-top mt-2 mb-1"
-                          alt={book.title}
+                          alt={book.name}
                       />
                   </div>
                  }
@@ -90,13 +95,24 @@ const Book = () => {
                      <p className="card-text">{book.description}</p>
                  </div>
 
-                 {/* Highlights */}
-                 <div className="mb-3">
-                     <h5>Highlights</h5>
-                     <p className="card-text">{book.highlights}</p>
+                 {/*/!* Highlights *!/*/}
+                 {/*<div className="mb-3">*/}
+                 {/*    <h5>Highlights</h5>*/}
+                 {/*    <p className="card-text">{book.highlights}</p>*/}
 
+                 {/*</div>*/}
+
+                 {/* Author Name */}
+                 <div className="mb-3">
+                     <span><b>Author: </b></span>
+                     <span className="card-text text-muted">{book.authorName}</span>
                  </div>
 
+                 {/* Stock Level */}
+                 <div className="mb-3">
+                     <span><b>Inventory Level: </b></span>
+                     <span className="card-text text-muted">{book.inventory}</span>
+                 </div>
 
                  {/* Add to Cart */}
                  <div className="mb-3">
@@ -106,14 +122,6 @@ const Book = () => {
                      </button>
                      {!isLoggedIn() && <div><i style={{color: "red"}}>Login to loan book</i></div>}
                  </div>
-
-
-                 {/* Stock Level */}
-                 <div className="mb-3">
-                     <h5>Inventory Level</h5>
-                     <p className="card-text text-muted">{book.inventory} qty</p>
-                 </div>
-                 }
 
                  <br/>
 

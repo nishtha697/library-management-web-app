@@ -23,7 +23,7 @@ function App() {
                 <Navbar />
                 <div className="m-5" style={{ minHeight: "50vh" }}>
                     <Routes>
-                        <Route path="/books/:id" element={<Book />} />
+                        <Route path="/books/:isbn" element={<Book />} />
                         <Route index element={<Home />} />
                         <Route path="/cart" element={<div>TODO CART</div>} />
                         <Route path="/loans" element={<div>TODO LOANS</div>} />

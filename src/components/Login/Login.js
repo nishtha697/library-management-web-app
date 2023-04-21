@@ -114,7 +114,6 @@ const Login = () => {
                                         </Button>
                                     </Form.Item>
                                 </Form>
-
                                 <div>Don't have an account? <Link to="/register" style={{ color: "coral" }} >Register here</Link></div>
                             </div>
                         </div>

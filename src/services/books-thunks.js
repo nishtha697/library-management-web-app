@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-const BOOKS_API = 'http://localhost:8080/book';
+const BOOKS_API = 'http://localhost:8081/book';
 
 export const getAllBooksThunk = createAsyncThunk('books/all',
     async () => {
