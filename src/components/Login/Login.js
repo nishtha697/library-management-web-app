@@ -22,7 +22,7 @@ const Login = () => {
 
     useEffect(() => {
         if (error && !currentUser) {
-            toast.error(`Login failed! ${error}!`, {
+            toast.error(`Login failed! User not found!`, {
                 position: "bottom-right",
                 autoClose: 2000,
                 hideProgressBar: true,
@@ -46,7 +46,7 @@ const Login = () => {
 
             navigate('/');
         }
-    }, [lastAttempt])
+    }, [error, currentUser, lastAttempt])
 
     const onFinish = async (values) => {
         console.log('Login Attempted:', values)

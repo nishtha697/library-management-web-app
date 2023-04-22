@@ -4,6 +4,7 @@ import {getBookByIsbnThunk} from "../../services/books-thunks";
 import {useDispatch, useSelector} from "react-redux";
 // import {shoppingCartAddBookThunk} from "../../services/cart-thunks";
 import {toast, ToastContainer} from "react-toastify";
+import {cartAddBookThunk} from "../../services/cart-thunks";
 
 // Reload the book using api call to have up to date inventory
 const Book = () => {
@@ -15,7 +16,7 @@ const Book = () => {
     const [book, setBook] = useState({...currentBook})
 
     const {profile, type} = useSelector(state => state.user);
-    const isLoggedIn = () => profile && Object.keys(profile).length > 0 && type;
+    const isLoggedIn = () => profile && Object.keys(profile).length > 0;
 
     useEffect(() => {
         dispatch(getBookByIsbnThunk(isbn))
@@ -31,15 +32,11 @@ const Book = () => {
 
     debugger
     const handleAddToCart = () => {
-        //TODO: Thunks
-        // dispatch(shoppingCartAddBookThunk(
-        //     {
-        //         username: profile.username,
-        //         book: {
-        //             bookId: book.book_id,
-        //             quantity: quantity
-        //         }
-        //     }))
+        dispatch(cartAddBookThunk(
+            {
+                username: profile.username,
+                isbn: book.isbn
+            }))
         toast.success("Book successfully added to Shopping cart!", {
             position: "bottom-right",
             autoClose: 1000,

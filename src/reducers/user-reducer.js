@@ -30,10 +30,11 @@ const userSlice = createSlice(
                     state.error = null;
                 },
             [userLoginThunk.rejected]:
-                (state, { payload }) => {
+                (state, action) => {
+                console.log(action)
                     state.lastAttempt = Date.now();
                     state.profile = null;
-                    state.error = payload.error;
+                    state.error = action.error;
                 }
         },
 
