@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home.js";
 import Book from "./components/Home/Book.js";
 import Cart from "./components/Cart/Cart";
+import Profile from "./components/Profile/Profile";
 // import Profile from "./components/Profile/Profile";
 // import Cart from "./components/Cart/Cart";
 
@@ -29,7 +30,7 @@ function App() {
                         <Route path="/cart" element={<div><Cart /></div>} />
                         <Route path="/loans" element={<div>TODO LOANS</div>} />
                         <Route path="/returns" element={<div>TODO RETURNS</div>} />
-                        <Route path="/profile" element={<div>TODO PROFILE</div>} />
+                        <Route path="/profile" element={<div><Profile/></div>} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="*" element={<div>INVALID PAGE</div>} />
