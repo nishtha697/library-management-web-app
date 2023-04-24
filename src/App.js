@@ -10,35 +10,34 @@ import Register from "./components/Register/Register";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home.js";
 import Book from "./components/Home/Book.js";
+import Cart from "./components/Cart/Cart";
+import Profile from "./components/Profile/Profile";
 import Return from "./components/Return/Return";
 import Loans from "./components/Loans/Loan";
 // import Profile from "./components/Profile/Profile";
 // import Cart from "./components/Cart/Cart";
 
 function App() {
-
-    const user = useSelector(state => state.user)
-    return (
-        <div style={{ width: "100%" }}>
-            <BrowserRouter>
-                <Navbar />
-                <div className="m-5" style={{ minHeight: "50vh" }}>
-                    <Routes>
-                        <Route path="/books/:isbn" element={<Book />} />
-                        <Route index element={<Home />} />
-                        <Route path="/cart" element={<div>TODO CART</div>} />
-                        <Route path="/loans" element={<Loans />} />
-                        <Route path="/profile" element={<div>TODO PROFILE</div>} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path = "/returns" element = {<Return/>} />
-                        <Route path="*" element={<div>INVALID PAGE</div>} />
-                    </Routes>
-                </div>
-            </BrowserRouter>
-
+  const user = useSelector((state) => state.user);
+  return (
+    <div style={{ width: "100%" }}>
+      <BrowserRouter>
+        <Navbar />
+        <div className="m-5" style={{ minHeight: "50vh" }}>
+          <Routes>
+            <Route path="/books/:isbn" element={<Book />} />
+            <Route index element={<Home />} />
+            <Route path="/cart" element={<div>TODO CART</div>} />
+            <Route path="/loans" element={<Loans />} />
+            <Route path="/profile" element={<div>TODO PROFILE</div>} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/returns" element={<Return />} />
+            <Route path="*" element={<div>INVALID PAGE</div>} />
+          </Routes>
         </div>
-     
+      </BrowserRouter>
+    </div>
   );
 }
 

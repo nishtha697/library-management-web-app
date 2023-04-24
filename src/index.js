@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
 import { logger } from "redux-logger";
-// import shoppingCartReducer from "./reducers/cart-reducers";
+import cartReducer from "./reducers/cart-reducers.js";
 import booksReducer from "./reducers/books-reducer.js";
 import userReducer from "./reducers/user-reducer.js";
 import storage from "redux-persist/lib/storage";
@@ -25,7 +25,7 @@ const store = configureStore(
         reducer: persistReducer(persistConfig, combineReducers({
                                                                    booksData: booksReducer,
                                                                    user: userReducer,
-                                                                   // shoppingCartData: shoppingCartReducer
+                                                                   cartData: cartReducer
                                                                })),
         middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false })
             .concat(logger)
