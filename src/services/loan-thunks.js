@@ -16,7 +16,7 @@ export const createTransactionThunk = createAsyncThunk(
 
 export const getAllNotReturnedBooksThunk = createAsyncThunk(
   "transaction/unreturned",
-  async ({ username }) => {
+  async (username) => {
     const response = await axios.get(
       `${TRANSACTION_API}/unreturned/${username}`
     );
@@ -24,12 +24,20 @@ export const getAllNotReturnedBooksThunk = createAsyncThunk(
   }
 );
 
-// export const markBookAsReturnedThunk = createAsyncThunk(
-//   "transaction/markBookAsReturned",
-//   async ({ transactionId, isbn }) => {
-//     const response = await axios.put(
-//       `${TRANSACTION_API}/${transactionId}/${isbn}`
-//     );
-//     return response.data;
-//   }
-// );
+export const getAllTransactionsForUser = createAsyncThunk(
+  "transaction/getAllTransaction",
+  async (username) => {
+    const response = await axios.get(`${TRANSACTION_API}/userId/${username}`);
+    return response.data;
+  }
+);
+
+export const markBookAsReturnedThunk = createAsyncThunk(
+  "transaction/markBookAsReturned",
+  async ({ transactionId, isbn }) => {
+    const response = await axios.put(
+      `${TRANSACTION_API}/${transactionId}/book/${isbn}`
+    );
+    return response.data;
+  }
+);

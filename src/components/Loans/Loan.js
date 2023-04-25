@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import Card from "antd/es/card/Card";
 import { Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllNotReturnedBooksThunk } from "../../services/loan-thunks";
+import {
+  getAllNotReturnedBooksThunk,
+  getAllTransactionsForUser,
+  markBookAsReturnedThunk,
+} from "../../services/loan-thunks.js";
 
 let booksData = [
   {
@@ -50,15 +54,31 @@ let booksData = [
 const Loans = () => {
   const [loading, setLoading] = useState(false);
   const { profile } = useSelector((state) => state.user);
-  const { loan } = useSelector((state) => state.loanData);
+  const { loan, transaction } = useSelector((state) => state.loanData);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllNotReturnedBooksThunk(profile.username));
+    dispatch(getAllTransactionsForUser(profile.username));
   }, []);
 
-  console.log("books is: " + loan);
+  const handleReturnBook = (isbn) => {
+    console.log("loan data is: " + isbn);
+    transaction.forEach((t) => {
+      for (let key in t) {
+        console.log(" key is: " + key + ", value is: " + t[key]);
+      }
+      let arr = t.allUnreturnedBooks;
+      arr.forEach((b) => {
+        if (b === isbn) {
+          dispatch(
+            markBookAsReturnedThunk({ transactionId: t.transactionId, isbn: b })
+          );
+        }
+      });
+    });
+  };
 
   return (
     <div>
@@ -91,12 +111,12 @@ const Loans = () => {
                   <small className="text-muted">{book.description}</small>
                 </p>
                 <p className="card-text">
-                  <small className="text-muted">
-                    Author: {book.authorName}
-                  </small>
+                  <small className="text-muted">Author: {book}</small>
                 </p>
 
-                <Button type="primary">Return Book</Button>
+                <Button onClick={() => handleReturnBook(book)} type="primary">
+                  Return Book
+                </Button>
                 {/* </Link> */}
               </div>
             </Card>

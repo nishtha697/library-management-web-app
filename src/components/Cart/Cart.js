@@ -71,21 +71,6 @@ const Cart = () => {
       username: cart.username,
       bookIds: cart.books,
     };
-    console.table(
-      "request is: " +
-        request.username +
-        ", " +
-        request.bookIds +
-        ", " +
-        cart.books
-    );
-
-    // for (let key in cart) {
-    //   console.log("key is: " + key + ", value is: " + cart[key]);
-    // }
-
-    console.log(cart);
-    debugger;
     dispatch(createTransactionThunk(request));
     setOrderPlaced(true);
   };
