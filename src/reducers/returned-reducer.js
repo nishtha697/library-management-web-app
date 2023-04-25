@@ -1,36 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-    getAllReturnedBooksThunk
-} from "../services/returned-thunks";
+import { getAllReturnedBooksThunk } from "../services/returned-thunks";
 
 const initialState = {
-    books: [],
-    error: null
-}
+  returned: [],
+  error: null,
+};
 
-const shoppingCartSlice = createSlice(
-    {
-        name: 'returned',
-        initialState,
-        reducers: {},
-        extraReducers: {
-            [getAllReturnedBooksThunk.pending]:
-                (state) => {
-                    state.books = {}
-                    state.error = null
-                },
-            [getAllReturnedBooksThunk.fulfilled]:
-                (state, { payload }) => {
-                    state.books = payload
-                    state.error = null
-                },
-            [getAllReturnedBooksThunk.rejected]:
-                (state, action) => {
-                    state.books = {}
-                    state.error = action.error
-                },
-            
-        }
-    });
+const shoppingCartSlice = createSlice({
+  name: "returned",
+  initialState,
+  reducers: {},
+  extraReducers: {
+    [getAllReturnedBooksThunk.pending]: (state) => {
+      state.returned = [];
+      state.error = null;
+    },
+    [getAllReturnedBooksThunk.fulfilled]: (state, { payload }) => {
+      state.returned = payload;
+      state.error = null;
+    },
+    [getAllReturnedBooksThunk.rejected]: (state, action) => {
+      state.returned = [];
+      state.error = action.error;
+    },
+  },
+});
 
 export default shoppingCartSlice.reducer;

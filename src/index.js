@@ -15,6 +15,7 @@ import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 import { PersistGate } from "redux-persist/integration/react";
 import loanReducer from "./reducers/loan-reducer";
+import returnedReducer from "./reducers/returned-reducer";
 
 const persistConfig = {
   key: "root",
@@ -29,6 +30,7 @@ const store = configureStore({
       user: userReducer,
       cartData: cartReducer,
       loanData: loanReducer,
+      returnedData: returnedReducer,
     })
   ),
   middleware: (getDefaultMiddleware) =>

@@ -8,6 +8,7 @@ import {
   getAllTransactionsForUser,
   markBookAsReturnedThunk,
 } from "../../services/loan-thunks.js";
+import { getBookByIsbnThunk } from "../../services/books-thunks.js";
 
 let booksData = [
   {
@@ -53,6 +54,7 @@ let booksData = [
 
 const Loans = () => {
   const [loading, setLoading] = useState(false);
+  const [allLoanBooks, setLoanBooks] = useState([]);
   const { profile } = useSelector((state) => state.user);
   const { loan, transaction } = useSelector((state) => state.loanData);
 
@@ -64,11 +66,7 @@ const Loans = () => {
   }, []);
 
   const handleReturnBook = (isbn) => {
-    console.log("loan data is: " + isbn);
     transaction.forEach((t) => {
-      for (let key in t) {
-        console.log(" key is: " + key + ", value is: " + t[key]);
-      }
       let arr = t.allUnreturnedBooks;
       arr.forEach((b) => {
         if (b === isbn) {
