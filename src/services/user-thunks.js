@@ -3,7 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 
 const USER_API = 'http://localhost:8081/user';
 
-export const userRegisterThunk = createAsyncThunk('user/register',
+export const userRegisterThunk = createAsyncThunk('user/createUser',
     async (user, { rejectWithValue }) => {
         try {
             const response = await axios.post(USER_API, user);
