@@ -9,6 +9,7 @@ const Home = () => {
     const dispatch = useDispatch();
 
     const { allBooks, loading } = useSelector(state => state.booksData)
+    console.log(allBooks)
 
     useEffect(() => {
         dispatch(getAllBooksThunk())
@@ -16,6 +17,7 @@ const Home = () => {
 
 
     return (
+        
         <div>
             {loading && <li className="list-group-item"> Loading... </li>}
                 <div className="row mx-auto align-items-stretch">

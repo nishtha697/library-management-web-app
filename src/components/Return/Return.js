@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getAllBooksThunk } from "../../services/books-thunks.js";
+import { getAllReturnedBooksThunk } from "../../services/returned-thunks.js";
 import Card from "antd/es/card/Card";
 
 const data = [{"isbn": 9780132350884,
@@ -40,10 +40,11 @@ const Return = () => {
 
     const dispatch = useDispatch();
 
-    const [ allBooks, loading ] = useState([])
+    const [ allBooks, loading ] = useSelector(state => state.returned)
+    const { profile } = useSelector(state => state.user)
 
     useEffect(() => {
-        loading(data)
+        dispatch(getAllReturnedBooksThunk(profile.username))
     }, [])
 
 
