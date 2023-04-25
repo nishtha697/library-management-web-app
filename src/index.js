@@ -1,46 +1,49 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { logger } from "redux-logger";
 import cartReducer from "./reducers/cart-reducers.js";
 import booksReducer from "./reducers/books-reducer.js";
 import userReducer from "./reducers/user-reducer.js";
 import storage from "redux-persist/lib/storage";
-import persistReducer from 'redux-persist/es/persistReducer';
-import persistStore from 'redux-persist/es/persistStore';
-import { PersistGate } from 'redux-persist/integration/react';
+import persistReducer from "redux-persist/es/persistReducer";
+import persistStore from "redux-persist/es/persistStore";
+import { PersistGate } from "redux-persist/integration/react";
+import loanReducer from "./reducers/loan-reducer";
 
 const persistConfig = {
-    key: 'root',
-    storage,
-}
+  key: "root",
+  storage,
+};
 
-const store = configureStore(
-    {
-        reducer: persistReducer(persistConfig, combineReducers({
-                                                                   booksData: booksReducer,
-                                                                   user: userReducer,
-                                                                   cartData: cartReducer
-                                                               })),
-        middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false })
-            .concat(logger)
-    });
+const store = configureStore({
+  reducer: persistReducer(
+    persistConfig,
+    combineReducers({
+      booksData: booksReducer,
+      user: userReducer,
+      cartData: cartReducer,
+      loanData: loanReducer,
+    })
+  ),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }).concat(logger),
+});
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <PersistGate loading={null} persistor={persistStore(store)}>
-                <App />
-            </PersistGate>
-        </Provider>
-
-    </React.StrictMode>
+  <React.StrictMode>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistStore(store)}>
+        <App />
+      </PersistGate>
+    </Provider>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
