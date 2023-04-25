@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Card from "antd/es/card/Card";
 import { Button } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllNotReturnedBooksThunk } from "../../services/loan-thunks";
 
 let booksData = [
   {
@@ -47,6 +49,16 @@ let booksData = [
 
 const Loans = () => {
   const [loading, setLoading] = useState(false);
+  const { profile } = useSelector((state) => state.user);
+  const { loan } = useSelector((state) => state.loanData);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllNotReturnedBooksThunk(profile.username));
+  }, []);
+
+  console.log("books is: " + loan);
 
   return (
     <div>
@@ -54,7 +66,7 @@ const Loans = () => {
       <div className="row mx-auto align-items-stretch">
         <div className="mb-2 text-muted">Total Books: {booksData.length}</div>
 
-        {booksData.map((book, idx) => (
+        {loan.map((book, idx) => (
           <div className="col" key={idx}>
             <Card style={{ minWidth: "200px", maxWidth: "300px" }}>
               <img

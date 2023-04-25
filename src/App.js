@@ -27,7 +27,7 @@ function App() {
           <Routes>
             <Route path="/books/:isbn" element={<Book />} />
             <Route index element={<Home />} />
-            <Route path="/cart" element={<div>TODO CART</div>} />
+            <Route path="/cart" element={<Cart />} />
             <Route path="/loans" element={<Loans />} />
             <Route path="/profile" element={<div>TODO PROFILE</div>} />
             <Route path="/register" element={<Register />} />
