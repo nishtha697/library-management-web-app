@@ -1,20 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
-import { Avatar, Button, Form, Input, Select } from 'antd'
-import { PlusOutlined, UserOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { useNavigate } from "react-router";
-import { logoutUser } from "../../reducers/user-reducer";
-
+import React from "react";
+import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import { Avatar } from 'antd'
+import { UserOutlined } from '@ant-design/icons';
 
 const Profile = () => {
-
-    //TODO: NEED TO FIX ADDRESS IN BACKEND
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
     const { profile } = useSelector(state => state.user)
-
 
     return (
         <div className="d-flex flex-column flex-wrap align-items-center">

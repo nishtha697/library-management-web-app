@@ -5,13 +5,10 @@ import { Button } from "antd";
 import {
   cartDeleteThunk,
   cartFindThunk,
-  cartAddBookThunk,
 } from "../../services/cart-thunks";
 import { getAllBooksThunk } from "../../services/books-thunks.js";
 import { createTransactionThunk } from "../../services/transaction-thunks.js";
-// import { createOrderThunk } from "../../services/orders-thunks.js";
 import CartItem from "./CartItem";
-// import { clearOrderReducer } from "../../reducers/orders-reducers";
 
 const Cart = () => {
   const dispatch = useDispatch();

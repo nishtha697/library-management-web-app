@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "react-router";
 import {getBookByIsbnThunk} from "../../services/books-thunks";
 import {useDispatch, useSelector} from "react-redux";
-// import {shoppingCartAddBookThunk} from "../../services/cart-thunks";
 import {toast, ToastContainer} from "react-toastify";
 import {cartAddBookThunk} from "../../services/cart-thunks";
 import {Tag} from "antd";
@@ -25,8 +24,6 @@ const Book = () => {
 
     useEffect(() => {
         setBook({...currentBook})
-        debugger
-        console.log(book)
     }, [currentBook])
 
     console.log(book)
@@ -54,26 +51,14 @@ const Book = () => {
             {!book ? <li className="list-group-item"> Loading... </li>
                    : <div className="card-body">
 
-
                  {/* Title */}
                  <h4 className="card-title mb-2">{book.name}</h4>
 
                  {/* Book Tags & Author */}
                  <div className="mb-3">
-                     {/*{book.category && book.category*/}
-                     {/*    .filter(c => c !== 'Other')*/}
-                     {/*    .map(c =>*/}
-                     {/*        <span key={c}*/}
-                     {/*            style={{ background: "coral" }}*/}
-                     {/*            className="badge badge-pill badge-warning me-3 mb-2"*/}
-                     {/*        >*/}
-                     {/*            {c}*/}
-                     {/*        </span>*/}
-                     {/*    )}*/}
                      {isLoggedIn() && type === "buyer" && <p className="card-text text-muted">Sold
                          by {book.authorName}</p>}
                  </div>
-
 
                  {/* Image */}
                  {book.image &&
@@ -92,13 +77,6 @@ const Book = () => {
                      <h5>Description</h5>
                      <p className="card-text">{book.description}</p>
                  </div>
-
-                 {/*/!* Highlights *!/*/}
-                 {/*<div className="mb-3">*/}
-                 {/*    <h5>Highlights</h5>*/}
-                 {/*    <p className="card-text">{book.highlights}</p>*/}
-
-                 {/*</div>*/}
 
                  {/* Author Name */}
                  <div className="mb-3">
@@ -123,9 +101,7 @@ const Book = () => {
                      </button>
                      {!isLoggedIn() && <div><i style={{color: "red"}}>Login to loan book</i></div>}
                  </div>
-
                  <br/>
-
              </div>
             }
             <ToastContainer/>
