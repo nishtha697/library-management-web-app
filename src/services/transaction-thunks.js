@@ -27,7 +27,7 @@ export const getAllNotReturnedBooksThunk = createAsyncThunk(
 export const getAllTransactionsForUser = createAsyncThunk(
   "transaction/getAllTransaction",
   async (username) => {
-    const response = await axios.get(`${TRANSACTION_API}/${username}`);
+    const response = await axios.get(`${TRANSACTION_API}/user/${username}`);
     return response.data;
   }
 );

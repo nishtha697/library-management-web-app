@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAllBooksThunk } from "../../services/books-thunks.js";
 import Card from "antd/es/card/Card";
+import {Tag} from "antd";
 
 const Home = () => {
 
@@ -25,7 +26,7 @@ const Home = () => {
 
                     {allBooks
                         .map((book, idx) => <div className="col" key={idx}>
-                            <Card style={{ height: "500px", minWidth: "200px", maxWidth: "300px" }}>
+                            <Card style={{ height: "520px", minWidth: "200px", maxWidth: "300px" }}>
                                 <img src={book.image} className="card-img-top" style={{ height: "300px", width: "auto" }} alt={book.title} />
                                 <div className="card-body">
                                     <Link
@@ -34,8 +35,10 @@ const Home = () => {
                                         style={{ textDecoration: "none" }}
                                     >
                                         <h6 className="card-title mt-2" style={{ maxHeight: "80px", overflow: "hidden" }}>{book.name}</h6>
-                                        <p className="card-text" style={{ maxHeight: "70px", overflow: "hidden" }}><small className="text-muted">{book.description}</small></p>
-                                        <p className="card-text"><small className="text-muted">Author: {book.authorName}</small></p>
+                                        <div><small style={{color: "black"}}>By {book.authorName}</small></div>
+                                        <div style={{ height: "auto", maxHeight: "70px", overflow: "hidden" }}><small className="text-muted">{book.description}</small></div>
+                                        {book.inventory < 1 ?
+                                         <Tag color="red">Out of Stock</Tag> : <Tag color="green">In Stock</Tag>}
                                     </Link>
                                 </div>
                             </Card>
