@@ -9,7 +9,7 @@ import Login from "./components/Login/Login.js";
 import Register from "./components/Register/Register";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home.js";
-import Book from "./components/Home/Book.js";
+import Book from "./components/Book/Book.js";
 import Cart from "./components/Cart/Cart";
 import Profile from "./components/Profile/Profile";
 import Return from "./components/Return/Return";

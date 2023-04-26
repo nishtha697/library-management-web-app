@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
     createBookThunk,
-    getAllBooksThunk,
-    getBookByIsbnThunk,
+    getAllBooksThunk, getBookByIsbnThunk,
     updateBookInventoryByIsbnThunk
 } from "../services/books-thunks";
 

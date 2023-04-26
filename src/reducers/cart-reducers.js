@@ -44,7 +44,7 @@ const shoppingCartSlice = createSlice(
             [cartAddBookThunk.fulfilled]:
                 (state, { payload }) => {
                     state.error = null
-                    state.cart.books.push(payload)
+                    state.cart = {}
                 },
             [cartAddBookThunk.rejected]:
                 (state, action) => {

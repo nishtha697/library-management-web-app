@@ -3,19 +3,19 @@ import {
   markBookAsReturnedThunk,
   createTransactionThunk,
   getAllNotReturnedBooksThunk,
-  getAllTransactionsForUser,
-} from "../services/loan-thunks";
-import { useDispatch, useSelector } from "react-redux";
+  getAllTransactionsForUser, getAllReturnedBooksThunk,
+} from "../services/transaction-thunks";
 
 const initialState = {
-  loan: [],
-  transaction: [],
+  loanedBooksByTransaction: [],
+  returnedBooksByTransaction: [],
+  allTransactions: [],
   error: null,
   loading: false,
 };
 
 const loanSlice = createSlice({
-  name: "loan",
+  name: "transaction",
   initialState,
   reducers: {},
   extraReducers: {
@@ -46,12 +46,12 @@ const loanSlice = createSlice({
     },
     [getAllNotReturnedBooksThunk.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.loan = payload;
+      state.loanedBooksByTransaction = payload;
       state.error = null;
     },
     [getAllNotReturnedBooksThunk.rejected]: (state, action) => {
       state.loading = false;
-      state.loan = [];
+      state.loanedBooksByTransaction = [];
       state.error = action.error;
     },
 
@@ -68,6 +68,18 @@ const loanSlice = createSlice({
     [getAllTransactionsForUser.rejected]: (state, action) => {
       state.loading = false;
       state.transaction = [];
+      state.error = action.error;
+    },
+    [getAllReturnedBooksThunk.pending]: (state) => {
+      state.returnedBooksByTransaction = [];
+      state.error = null;
+    },
+    [getAllReturnedBooksThunk.fulfilled]: (state, { payload }) => {
+      state.returnedBooksByTransaction = payload;
+      state.error = null;
+    },
+    [getAllReturnedBooksThunk.rejected]: (state, action) => {
+      state.returnedBooksByTransaction = [];
       state.error = action.error;
     },
   },

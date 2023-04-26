@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-const CART_API = 'http://localhost:8081/cart';
+const CART_API = 'http://localhost:8080/cart';
 
 export const cartDeleteThunk = createAsyncThunk('cart/delete',
     async (username, { rejectWithValue }) => {

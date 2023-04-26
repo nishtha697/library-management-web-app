@@ -12,14 +12,14 @@ const Book = () => {
     const dispatch = useDispatch()
     const {isbn} = useParams()
 
-    let {currentBook} = useSelector(state => state.booksData);
+    let { currentBook } = useSelector(state => state.booksData);
     const [book, setBook] = useState({...currentBook})
 
     const {profile, type} = useSelector(state => state.user);
     const isLoggedIn = () => profile && Object.keys(profile).length > 0;
 
     useEffect(() => {
-        dispatch(getBookByIsbnThunk(isbn))
+        dispatch(getBookByIsbnThunk({isbn}))
     }, [])
 
     useEffect(() => {

@@ -1,14 +1,14 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const TRANSACTION_API = "http://localhost:8081/transaction";
+const TRANSACTION_API = "http://localhost:8080/transaction";
 
 export const createTransactionThunk = createAsyncThunk(
   "transaction/createTransaction",
-  async (request) => {
+  async ({transaction}) => {
     const response = await axios.post(
       `${TRANSACTION_API}/createTransaction`,
-      request
+      transaction
     );
     return response.data;
   }
@@ -27,7 +27,7 @@ export const getAllNotReturnedBooksThunk = createAsyncThunk(
 export const getAllTransactionsForUser = createAsyncThunk(
   "transaction/getAllTransaction",
   async (username) => {
-    const response = await axios.get(`${TRANSACTION_API}/userId/${username}`);
+    const response = await axios.get(`${TRANSACTION_API}/${username}`);
     return response.data;
   }
 );
@@ -40,4 +40,12 @@ export const markBookAsReturnedThunk = createAsyncThunk(
     );
     return response.data;
   }
+);
+
+export const getAllReturnedBooksThunk = createAsyncThunk(
+    "transactions/returned",
+    async (username) => {
+        const response = await axios.get(`${TRANSACTION_API}/returned/${username}`);
+        return response.data;
+    }
 );

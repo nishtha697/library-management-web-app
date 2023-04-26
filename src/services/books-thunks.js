@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const BOOKS_API = "http://localhost:8081/book";
+const BOOKS_API = "http://localhost:8080/book";
 
 export const getAllBooksThunk = createAsyncThunk("books/all", async () => {
   const response = await axios.get(`${BOOKS_API}`);
@@ -10,7 +10,7 @@ export const getAllBooksThunk = createAsyncThunk("books/all", async () => {
 
 export const getBookByIsbnThunk = createAsyncThunk(
   "books/isbn",
-  async (isbn, { rejectWithValue }) => {
+  async ({isbn}, { rejectWithValue }) => {
     try {
       const response = await axios.get(`${BOOKS_API}/${isbn}`);
       return response.data;

@@ -8,7 +8,7 @@ import {
   cartAddBookThunk,
 } from "../../services/cart-thunks";
 import { getAllBooksThunk } from "../../services/books-thunks.js";
-import { createTransactionThunk } from "../../services/loan-thunks.js";
+import { createTransactionThunk } from "../../services/transaction-thunks.js";
 // import { createOrderThunk } from "../../services/orders-thunks.js";
 import CartItem from "./CartItem";
 // import { clearOrderReducer } from "../../reducers/orders-reducers";
@@ -19,13 +19,13 @@ const Cart = () => {
   const { profile } = useSelector((state) => state.user);
   const { cart } = useSelector((state) => state.cartData);
   const { allBooks } = useSelector((state) => state.booksData);
-  // const { error, orders } = useSelector(state => state.ordersData)
+  const { error } = useSelector(state => state.transactionData)
   const [orderPlaced, setOrderPlaced] = useState(false);
   const inputRef = useRef(null);
 
   useEffect(() => {
     if (orderPlaced) {
-      // if (!error) {
+      if (!error) {
       dispatch(cartDeleteThunk(profile.username));
       toast.success("Loan request placed! :)", {
         position: "top-right",
@@ -37,18 +37,18 @@ const Cart = () => {
         progress: undefined,
         theme: "colored",
       });
-      // } else {
-      //     toast.error('Loan request could not be placed!', {
-      //         position: "top-right",
-      //         autoClose: 1000,
-      //         hideProgressBar: false,
-      //         closeOnClick: true,
-      //         pauseOnHover: false,
-      //         draggable: true,
-      //         progress: undefined,
-      //         theme: "colored",
-      //     });
-      // }
+      } else {
+          toast.error('Loan request could not be placed!', {
+              position: "top-right",
+              autoClose: 1000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: false,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+          });
+      }
     }
   }, [orderPlaced]);
 
@@ -61,17 +61,12 @@ const Cart = () => {
   }, []);
 
   const handleCheckout = () => {
-    const order = {
-      username: profile.username,
-      books: cart.books,
-    };
-    dispatch(cartAddBookThunk(order));
-    let request = {
+    const transaction = {
       transactionId: Date.now(),
-      username: cart.username,
-      bookIds: cart.books,
+      username: profile.username,
+        bookIsbns: cart.books,
     };
-    dispatch(createTransactionThunk(request));
+    dispatch(createTransactionThunk({transaction}));
     setOrderPlaced(true);
   };
 
