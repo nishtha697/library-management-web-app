@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 // import {shoppingCartAddBookThunk} from "../../services/cart-thunks";
 import {toast, ToastContainer} from "react-toastify";
 import {cartAddBookThunk} from "../../services/cart-thunks";
+import {Tag} from "antd";
 
 // Reload the book using api call to have up to date inventory
 const Book = () => {
@@ -110,11 +111,14 @@ const Book = () => {
                      <span><b>Inventory Level: </b></span>
                      <span className="card-text text-muted">{book.inventory}</span>
                  </div>
-
+                 <div className="mb-3">
+                 {book.inventory < 1 ?
+                  <Tag color="red">Out of Stock</Tag> : <Tag color="green">In Stock</Tag>}
+                 </div>
                  {/* Add to Cart */}
                  <div className="mb-3">
                      <button className="btn btn-outline-success" style={{display: "inline"}}
-                             disabled={!isLoggedIn()} onClick={handleAddToCart}>
+                             disabled={!isLoggedIn() || book.inventory < 1} onClick={handleAddToCart}>
                          Add to Cart (Loan)
                      </button>
                      {!isLoggedIn() && <div><i style={{color: "red"}}>Login to loan book</i></div>}
